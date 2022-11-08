@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>javascript code</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/b13e84f270.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <main>
+        <header>
+            <div class="icon">
+                <h2 class="logo">JsCode</h2>
+            </div>
+
+            <nav>
+                <ul>
+                    <li data-li="EXERCICE1" class="active"><a href="#">EXERCICE1</a></li>
+                    <li data-li="EXERCICE2"><a href="#">EXERCICE2</a></li>
+                    <li data-li="EXERCICE3"><a href="#">EXERCICE3</a></li>
+                    <li data-li="EXERCICE4"><a href="#">EXERCICE4</a></li>
+                    <li data-li="EXERCICE5"><a href="#">EXERCICE5</a></li>
+                    <li data-li="EXERCICE6"><a href="#">EXERCICE6</a></li>
+                    <li data-li="EXERCICE7"><a href="#">EXERCICE7</a></li>
+                    <li data-li="EXERCICE8"><a href="#">EXERCICE8</a></li>
+                    <li data-li="EXERCICE9"><a href="#">EXERCICE9</a></li>
+                    <li data-li="EXERCICE10"><a href="#">EXERCICE10</a></li>
+                </ul>
+            </nav>
+        </header> 
+        <section>
+            <h1>Les exercices & <br><span>JavaScript</span> <br>Corrigés</h1>
+                <br>
+        </section>
+            <section class="item EXERCICE1">
+                    <h2>Permutation de deux nombres</h2>
+                    <p class="paragraph">Ecrire un script qui permute deux nombres saisis dans deux inputs</p>
+                    <form name="form" class="paragraph2">   
+                        <input type="text" name="a" >
+                        <input type="button" value="/" onClick="permuter()" class="cn">
+                        <input type="text" name="b" >
+                    </form>
+                    <pre class="paragraph3">
+                        function permuter(){
+                            x=document.form.a.value;
+                            document.form.a.value=document.form.b.value;
+                            document.form.b.value=x;
+                         }
+                    </pre>
+            </section>
+            <section class="item EXERCICE2" style="display: none;">
+                    <h2 >Valider une date</h2>
+                    <p class="paragraph">Ecrire un script qui permet de saisir les trois champs d'une date (jour, mois et annee) et d'indiquer si la date est correcte ou non.</p>
+                    <form name="date" class="paragraph2">
+                        <input type="text"  id="day" placeholder="j"/>
+                        <input type="text"  id="month" placeholder="m"/>
+                        <input type="text"  id="year" placeholder="a"/>
+                        <input type="button" value="check date" onclick="main()" class="btn">
+                        <h4 id="RESULTS">results</h4>
+                    </form>
+                    <pre class="paragraph3">
+                        function main() {
+                            let RESULTS = document.getElementById("RESULTS");
+                            let j = document.getElementById("day").value;
+                            let m = document.getElementById("month").value;
+                            let a = document.getElementById("year").value;
+                            var bissextille = true;
+                            var cas1;
+                            var cas2;
+                            var cas3;
+                            var cas4;
+                            bissextille = a % 400 != 0 && a % 4 != 0 && a % 100 == 0;
+                            cas1 = a > 0 && (m === 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) <br> && (j >= 1 && j <= 31);
+                            cas2 = a > 0 && (m == 4 || m == 6 || m == 9 || m == 11) && (j >= 1 && j <= 30);
+                            cas3 = a > 0 && m == 2 && !bissextille && (j >= 1 && j <= 28);
+                            cas4 = a > 0 && m == 2 && bissextille && (j >= 1 && j <= 29);
+                                if (cas1 || cas2 || cas3 || cas4) {
+                                    RESULTS.innerHTML="est valide"
+                                }
+                                else {
+                                    RESULTS.innerHTML="est in valide"
+                                }
+                            }
+                    </pre>
+            </section>
+            <section class="item EXERCICE3" style="display: none;">
+                    <h2>Table de multiplication</h2>
+                    <p class="paragraph">Afficher la table de multiplication d'un nombre saisi par l'utilisateur dans un input.</p>
+                    <form class="paragraph2">
+                        Enter the number : <input id="number" />
+                        <button onclick="addNumbers()" class="btn">Print Multiplication table</button>
+                        <p id="result"></p>
+                    </form>
+                    <pre class="paragraph3">
+                        function addNumbers() {
+                            var number;
+                            var result = "";
+                          
+                            number = Number(document.getElementById("number").value);
+                          
+                            for(var i = 1; i<= 10; i++){
+                              result = result + "<p>"+number + "*" + i + "=" + number * i+"</p>";
+                            }
+                          
+                            document.getElementById("result").innerHTML = result;
+                          }
+                    </pre>
+            </section>
+              <section class="item EXERCICE4" style="display: none;">
+                    <h2>Devine le nombre !</h2>
+                    <p class="paragraph">L’utilisateur doit deviner un nombre entre 1 et 50 que le programme a choisi aléatoirement en 10 tentatives. Quand l’utilisateur entre une valeur, on lui affiche le nombre de tentatives restantes, ainsi qu’un message indiquant si sa réponse est correcte ou pas.</p> <form class="paragraph2">
+                            <p>Choisier un nombre entre 1 to 100.</p>
+                
+                            <label for="essayer">Réesseyez encore !:</label><input type="text" id="essayer">
+                            <input type="button" value="Envoyer" onclick="tester()" id="button" class="btn">
+                            <div> <p id="top"></p> <p id="resultat"></p></div>
+                    </form>
+                    <pre class="paragraph3">
+                        var randomNr = Math.floor(Math.random() *100) + 1 ;
+                        const hestorique = document.getElementById('top');
+                        const resultat = document.getElementById('resultat');
+                        const essayer = document.getElementById('essayer');
+                        const button = document.getElementById('button');
+                        var geussNr = 1
+            
+                        function tester(){
+                            var Nruser = Number(essayer.value);
+                            if (geussNr === 1){
+                                hestorique.textContent = 'vos teste:  '  ;
+                            }
+                            hestorique.textContent += Nruser + ' ';
+                            if (Nruser === randomNr)  resultat.textContent = 'bravo '
+                            else if (geussNr === 10)   resultat.textContent = <br>'le bon Nr : ' +randomNr;button.disable=true;
+                            geussNr++
+                            essayer.value = '';
+                        }
+                    </pre>
+            </section>
+              <section class="item EXERCICE5" style="display: none;">
+                <h2>Losange en étoiles</h2>
+                <p class="paragraph">Ce programme a pour objectif de dessiner un losange en étoiles dont la longueur des diagonales est un nombre impair saisi par l'utilisateur. Dans le cas ou l</p>
+                <form class="paragraph2">
+                    <label for="n">Saisir la longueur des diagonales</label>
+                    <input name="la valure de n" type="number" id="n">
+                    <input type="button" value="Dessiner" id="button" onclick="pernumb()" class="btn">
+                     <p id="invalid">  </p><br>
+                     <P id="lonsonge"> </P>
+                 </form>
+                 <pre class="paragraph3">
+                    function pernumb(){
+                        let invalid = document.getElementById('invalid');
+                        let n = document.getElementById('n').value;
+                     if(n % 2 == 0 ){
+                invalid.innerHTML="est in valide"
+            }
+            else{
+                lons()
+           }
+    
+            function lons(){
+                let n = document.getElementById('n').value
+        let string = "";
+        // Upside pyramid
+        for (let i = 1; i <= n - 2; i++) {
+          // printing spaces
+          for (let j = n; j > i; j--) {
+            string += " ";
+          }
+          // printing star
+          for (let k = 0; k < i * 2 - 1; k++) {
+            string += "*";
+          }
+          string += "\n";
+        }
+        // downside pyramid
+        for (let i = 1; i <= n  ; i++) {
+          // printing spaces
+          for (let j = 0; j < i; j++) {
+            string += " ";
+          }
+          // printing star
+          for (let k = (n - i) * 2 - 1; k > 0; k--) {
+            string += "*";
+          }
+          string += "\n";
+        }
+    
+        document.getElementById("lonsonge").innerHTML=(`<pre>${string}</pre>`);
+      }
+    }
+                 </pre>
+            </section>
+              <section class="item EXERCICE6" style="display: none;">
+                    <h2>Calculatrice</h2>
+                    <p class="paragraph">Créez 4 fonctions javascript (somme, soustraction, division, multiplication). L'utilisateur saisie deux nombres dans deux inputs, choisi ensuite une opération arthmétique. Le résultat est donné par l'une des 4 fonctions javascript.</p>
+                    <form name="calculatri" class="paragraph2">   
+                        <input type="text" name="nubr1" >
+                        <input type="text" name="nubr2" ><br /><br>
+                        <input type="button" value="+" onclick="calculatrice('add')" class="cn">
+                        <input type="button" value="-" onclick="calculatrice('sou')" class="cn">
+                        <input type="button" value="*" onclick="calculatrice('mul')" class="cn">
+                        <input type="button" value="/" onclick="calculatrice('div')" class="cn">
+                        <br />
+                        <input type="text" name="rescalc" >
+                     </form>
+                     <pre class="paragraph3">
+                        function operation(op){
+                            nombre1=document.calc.nbr1.value;
+                            nombre2=document.calc.nbr2.value;
+                            switch(op){
+                               case "add": resultat=parseFloat(nombre1)+parseFloat(nombre2); break;
+                               case "sou": resultat=nombre1-nombre2; break;
+                               case "mul": resultat=nombre1*nombre2; break;
+                               case "div": {
+                                  if(nombre2!=0)
+                                     resultat=nombre1/nombre2;
+                                  else
+                                     resultat="Erreur!";
+                               }
+                            }
+                            document.calc.res.value=resultat;
+                         }
+                    </pre>
+            </section> 
+             <section class="item EXERCICE7" style="display: none;">
+                    <h2>Recherche et suppression dans une chaine</h2>
+                    <p class="paragraph">Ecrire un programme Javascript qui demande à l’utilisateur de saisir une phrase dans une zone de texte et un mot dans une autre zone de texte. Le clique sur le bouton rechercher affiche un message si le mot existe dans la phrase ou non. Le clique sur le bouton supprimer permet d’effacer toutes les occurrence du mot dans la phrase ( si le mot existe bien sûr).</p>
+                    <form name="calc" class="paragraph2">
+                        <label for="phrase">Saisir une phrase</label>
+                        <input type="text" id="phrase"/>
+                        <button onclick="filtered1()" type="submit" class="btn">Rechercher</button><br/><br/>
+                        
+                        <label for="mot">Saisir le mot à rechercher ou à supprimer</label>
+                        <input type="text" id="mot"/>
+                        <button onclick="deleted()" class="btn">Supprimer les occurences</button><br/><br/>
+            
+                        <p id="p"></p>
+                        
+                    </form>
+                    <pre class="paragraph3">
+                        function filtered(){
+                            var phrase = document.getElementById('phrase').value
+                            var mot = document.getElementById('mot').value
+                            var p = document.getElementById('p')
+                            if (  phrase.includes(mot) ){
+                                return p.innerHTML= ("bravo:" +""+ mot +" "+ "est se trouve dans la phrase")
+                                }
+                            else {
+                                p.innerHTML= ("Erreur aucun resultat " )
+                            }
+                        }
+                        function deleted(){
+                            var phrase = document.getElementById('phrase').value
+                            var mot = document.getElementById('mot').value
+                        
+                            phrase.replace(mot,"")
+                            return document.getElementById('p').innerHTML= ( phrase.replace(mot,""))
+                        }
+                    </pre>
+            </section>
+              <section class="item EXERCICE8" style="display: none;">
+                    <h2>Compter le nombre de voyelles dans une chaine</h2>
+                     <p class="paragraph">Ecrire un programme javascript qui permet de calculer le nombre de voyelles (a,e,i,o,u,y) dans une phrase saisie par l'utilisateur.</p>
+                    <form name="form3" class="paragraph2">
+                        <lebel>Saisir une phrase</lebel>
+                        <input type="text" id="p1">
+                        <input type="button" value="Compter le nombre de voyelles" onclick="test()" class="btn">
+                        <br><br>
+                        <p id="paragraph1"></p>
+                    </form>
+                    <pre class="paragraph3">
+                        function test(){
+                            let number = 0
+                            let str = document.getElementById('p').value
+                            let paragraph = document.getElementById('paragraph')
+                           
+                            for(const el of str.toLowerCase()){
+
+                                if(el === 'a' ||el === 'e' ||el === 'i' ||el === 'o' ||el=== 'u'||el=== 'y'){
+                                    number++
+                                }  
+                            }
+                            return paragraph.innerHTML= ('la phrase que vous avez saisi contient '+ number + ' voyelles' )
+                        }
+                    </pre>
+            </section> 
+             <section class="item EXERCICE9" style="display: none;">
+                    <h2>Tri d'un tableau</h2>
+                    <p class="paragraph">Ecrire un programme javascript qui permet de trier un tableau d'entier (Utiliser n'importe quel algorithme de tri mais surtout pas la function Sort de l'objet Array).
+                    l'utilisateur commence tout d'abord par saisir la taille du tableau, ensuite il remplit le tableau pour cliquer à la fin sur un bouton trier : celui-ci affichera le tableau en ordre croissant ou décroissant.    
+                    </p>
+                    <Form name="form1" class="paragraph2">
+                        <h3>Tracer une table</h3><br>
+                        <p>
+                            <label for="row">Donner le nombre de lignes:</label> <input type="number" name="row">
+                        </p><br>
+                        <p>
+                            <input type="button" name="Tr" value="Tracer" onclick="table()" class="btn">
+                        </p><br>
+                        <p>
+                            <input type="button" name="Bt1" value="Trier" onclick="trie()" class="btn">
+                        </p><br>
+                        <Table id="table" border=1></Table><br>
+                
+                        <p id="p"></p>
+                
+                        <table id="table2" order=1></table>
+                        <p id="result"></p>
+                    </Form>           
+                    <pre class="paragraph3">
+                        function table() {
+                            let row = document.form.row.value;
+                            for (let i = 1; i <= row; i++) {
+                                let addInput = document.createElement("input");
+                                addInput.type = "text";
+                                addInput.name = "unsorteddNumbers[]"
+                                addInput.size = 2;
+                                document.getElementById("table").appendChild(addInput);
+                            }
+                        }
+                        function bubleSort(inputNodes) {
+                            let values = [];
+                            for (let i = 0; i < inputNodes.length; i++) {
+                                values.push(inputNodes[i].value);
+                            }
+                            for (let i = 0; i < values.length; i++) {
+                                for (j = i + 1; j < values.length; j++) {
+                                    if (values[i] > values[j]) {
+                                        temp = values[i];
+                                        values[i] = values[j];
+                                        values[j] = temp;
+                                    }
+                                }
+                            }
+                            return values;
+                        }
+                        function trie() {
+                            console.log(document.getElementsByName("unsorteddNumbers[]"));
+                            let sortedValues = bubleSort(document.getElementsByName("unsorteddNumbers[]"));
+                            sortedValues.forEach(function (inputValue) {
+                                let newInput = document.createElement("input");
+                                newInput.type = "text";
+                                newInput.size = 2;
+                                newInput.name = "sorteddNumbers[]";
+                                newInput.value = inputValue;
+                                document.getElementById("table2").appendChild(newInput);
+                            });
+                        }
+                    </pre>
+            </section>  
+            <section class="item EXERCICE10" style="display: none;">
+                    <h2>Recherche dans un tableau</h2>
+                    <p class="paragraph">Ecrire un programme javascript qui permet de rechercher une valeur dans un tableau d'entier.
+                    l'utilisateur doit suivre les étapes suivantes:
+                    1. Saisir la taille du tableau.
+                    2. Remplir le tableau par des entiers.
+                    3. Introduire la valeur à rechercher.
+                    4. Cliquer sur le boutons {Recherche}.   
+                    Le programme affiche ensuite un message si la valeur à rechercher existe ou non dans le tableau.
+                    </p>
+                    <form class="paragraph2">
+                        <label>Donner la taille du tableau</label>
+                                <input type="number" id="Row"> <input type="button" name="tbl" value="Valider" onclick="AddTable()" class="btn"><br><br>
+                                <label>Veuiller remplir le tableau</label><br>
+                                <table id="Table"></table><br><br>
+                                <label> Donner la valeur à rechercher dans le tableau </label>
+                                <input type="number" name="item" id="search-value">
+                                <input type="button" name="Bt2" id="Bt2" value="Recherche" onclick="filtered()" class="btn"><br><br>
+                                <p id="rslt"></p>
+                    </form>
+                    <pre class="paragraph3">
+                        function AddTable() {
+                            let row = document.getElementById('Row').value;
+                            
+                            for (let i = 1; i <= row; i++) {
+                                let addInput = document.createElement("input");
+                                addInput.type = "text";
+                                addInput.name = "unsorteddNumbers[]";
+                                addInput.size = 1;
+                                document.getElementById("Table").appendChild(addInput);
+                            }
+                            }
+                            //   chercher dans le Tableau
+            
+                        function filtered() {
+            
+                            let inputValue = document.getElementById("search-value").value;
+                            let sortedValues = document.getElementsByName("unsorteddNumbers[]");
+                            let founded = false;
+                            sortedValues.forEach(function(element) {
+            
+                            if(element.value == inputValue) {
+                            founded = true;
+            
+                            }
+                            });
+            
+                            if(founded) {
+                        document.getElementById('rslt').innerHTML= `your search is found: ${inputValue} `
+                            } else {
+            
+                        document.getElementById('rslt').innerHTML= `the value  ${inputValue} not found`
+            
+                            } 
+                        }
+                    </pre>
+            </section>
+            <footer>
+                <div class="icon">
+                    <a href="#twiter"><i class="fa-brands fa-square-twitter"></i></a>
+                    <a href="#facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#linkedin"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#github"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </footer>
+          
+    </main>
+	<script src="script.js"></script>
+</body>
+</html>
